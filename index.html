@@ -370,22 +370,17 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .arch-photo-inner {
   width: 100%;
   height: 100%;
-  background: linear-gradient(120deg, #1A2744 0%, #2d3d6b 50%, #1a3050 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background-color: #1A2744;
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
-.arch-photo-tag {
-  font-family: var(--ff-display);
-  font-size: clamp(20px, 3vw, 36px);
-  font-weight: 900;
-  color: rgba(255,255,255,0.06);
-  letter-spacing: -1px;
-  text-align: center;
-  padding: 0 40px;
-  text-wrap: balance;
+.arch-photo-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(15,24,48,0.25) 0%, rgba(15,24,48,0.15) 100%);
 }
-.arch-photo-tag span { color: rgba(255,208,0,0.12); }
 .features {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -451,14 +446,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .awards-photo-inner {
   width: 100%;
   height: 100%;
-  background: linear-gradient(160deg, #0F1830 0%, #1A2744 45%, #253560 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.awards-photo-glyph {
-  font-size: 80px;
-  opacity: 0.15;
+  background-color: #1A2744;
+  background-size: cover;
+  background-position: center;
 }
 .awards-title {
   font-family: var(--ff-display);
@@ -927,9 +917,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
     </div>
   </div>
   <div class="arch-photo fade-up d1">
-    <div class="arch-photo-inner">
-      <div class="arch-photo-tag" id="arch-tag">Loading…</div>
-    </div>
+    <div class="arch-photo-inner" id="arch-photo-inner"></div>
   </div>
   <div class="container">
     <div class="features" id="features-grid"></div>
@@ -941,9 +929,7 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   <div class="container">
     <div class="awards-grid">
       <div class="awards-photo fade-up">
-        <div class="awards-photo-inner">
-          <div class="awards-photo-glyph" id="awards-glyph">🔧</div>
-        </div>
+        <div class="awards-photo-inner" id="awards-photo-inner"></div>
       </div>
       <div class="fade-up d2">
         <div class="section-eyebrow">why choose us</div>
@@ -1083,9 +1069,15 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 'use strict';
 
 /* ── TRADE DATA ── */
+var UNSPLASH = 'https://images.unsplash.com/photo-';
 var TRADES = {
   plumber: {
     label: 'Plumber', plural: 'Plumbing', glyph: '🔧',
+    photos: {
+      hero:     UNSPLASH + '1558618666-fcd25c85cd64?auto=format&fit=crop&w=1920&q=80',
+      arch:     UNSPLASH + '1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=1400&q=80',
+      portrait: UNSPLASH + '1585771724684-38269d6639fd?auto=format&fit=crop&w=800&h=1000&q=80',
+    },
     heroBg: 'linear-gradient(135deg, #0d1a30 0%, #1A2744 55%, #0a1520 100%)',
     heroLines: function(name, suburb) {
       return ['TRUSTED', '<span class="accent">' + suburb.toUpperCase() + '</span>', 'PLUMBING.'];
@@ -1121,6 +1113,11 @@ var TRADES = {
   },
   electrician: {
     label: 'Electrician', plural: 'Electrical', glyph: '⚡',
+    photos: {
+      hero:     UNSPLASH + '1621905251918-48416bd8575a?auto=format&fit=crop&w=1920&q=80',
+      arch:     UNSPLASH + '1509391366360-2e959784a276?auto=format&fit=crop&w=1400&q=80',
+      portrait: UNSPLASH + '1558618047-3c8c76ca7d13?auto=format&fit=crop&w=800&h=1000&q=80',
+    },
     heroBg: 'linear-gradient(135deg, #0a1020 0%, #1A2744 55%, #070d1a 100%)',
     heroLines: function(name, suburb) {
       return ['LICENSED', '<span class="accent">' + suburb.toUpperCase() + '</span>', 'ELECTRICIAN.'];
@@ -1156,6 +1153,11 @@ var TRADES = {
   },
   builder: {
     label: 'Builder', plural: 'Building', glyph: '🏗️',
+    photos: {
+      hero:     UNSPLASH + '1504307651254-35680f356dfd?auto=format&fit=crop&w=1920&q=80',
+      arch:     UNSPLASH + '1581578731548-c64695cc6952?auto=format&fit=crop&w=1400&q=80',
+      portrait: UNSPLASH + '1503387762-592deb58ef4e?auto=format&fit=crop&w=800&h=1000&q=80',
+    },
     heroBg: 'linear-gradient(135deg, #0d1520 0%, #1A2744 55%, #080f1c 100%)',
     heroLines: function(name, suburb) {
       return ['QUALITY', '<span class="accent">BUILDING</span>', 'IN ' + suburb.toUpperCase() + '.'];
@@ -1191,6 +1193,11 @@ var TRADES = {
   },
   landscaper: {
     label: 'Landscaper', plural: 'Landscaping', glyph: '🌿',
+    photos: {
+      hero:     UNSPLASH + '1416879595882-3373a0480b5b?auto=format&fit=crop&w=1920&q=80',
+      arch:     UNSPLASH + '1558904541-efa843a96f01?auto=format&fit=crop&w=1400&q=80',
+      portrait: UNSPLASH + '1601985705806-5b9a5e1e6ae4?auto=format&fit=crop&w=800&h=1000&q=80',
+    },
     heroBg: 'linear-gradient(135deg, #0a1a0d 0%, #1A2744 55%, #071210 100%)',
     heroLines: function(name, suburb) {
       return ['TRANSFORM YOUR', '<span class="accent">OUTDOOR</span>', 'SPACE.'];
@@ -1226,6 +1233,11 @@ var TRADES = {
   },
   concreter: {
     label: 'Concreter', plural: 'Concreting', glyph: '🏗️',
+    photos: {
+      hero:     UNSPLASH + '1590579491624-f98f36d4c763?auto=format&fit=crop&w=1920&q=80',
+      arch:     UNSPLASH + '1541888946425-d81bb19240f5?auto=format&fit=crop&w=1400&q=80',
+      portrait: UNSPLASH + '1635869428940-54fcf9a3d9a3?auto=format&fit=crop&w=800&h=1000&q=80',
+    },
     heroBg: 'linear-gradient(135deg, #111520 0%, #1A2744 55%, #0a0e18 100%)',
     heroLines: function(name, suburb) {
       return ['QUALITY', '<span class="accent">CONCRETE</span>', 'WORK.'];
@@ -1293,7 +1305,17 @@ function render() {
   nb.innerHTML = words.slice(0, -1).join(' ') + (words.length > 1 ? ' ' : '') + '<span>' + words[words.length - 1] + '</span>';
 
   /* Hero */
-  document.getElementById('hero-photo').style.background = T.heroBg;
+  var heroPhotoEl = document.getElementById('hero-photo');
+  heroPhotoEl.style.backgroundImage = 'url("' + T.photos.hero + '"), ' + T.heroBg;
+  heroPhotoEl.style.backgroundSize = 'cover';
+  heroPhotoEl.style.backgroundPosition = 'center';
+
+  /* Arch + portrait photos */
+  var archEl = document.getElementById('arch-photo-inner');
+  archEl.style.backgroundImage = 'url("' + T.photos.arch + '")';
+
+  var portraitEl = document.getElementById('awards-photo-inner');
+  portraitEl.style.backgroundImage = 'url("' + T.photos.portrait + '")';
   var lines = T.heroLines(p.name, p.suburb);
   document.getElementById('hero-headline').innerHTML =
     lines.map(function(l){ return '<span class="stack">' + l + '</span>'; }).join('');
@@ -1329,7 +1351,6 @@ function render() {
   });
 
   /* Awards */
-  document.getElementById('awards-glyph').textContent = T.glyph;
   document.getElementById('awards-title').innerHTML = T.awardsTitle;
   var al = document.getElementById('award-list');
   T.awards.forEach(function(a) {
