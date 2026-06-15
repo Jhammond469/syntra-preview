@@ -788,6 +788,173 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
 
+/* ── PRICING ── */
+.pricing {
+  padding: var(--space-section) 0;
+  background: var(--c-surface-soft);
+}
+.pricing-title {
+  font-family: var(--ff-display);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  color: var(--c-ink);
+  margin-bottom: 16px;
+  text-wrap: balance;
+}
+.pricing-sub {
+  font-family: var(--ff-body);
+  font-size: var(--fs-body-lg);
+  color: var(--c-body);
+  line-height: 1.65;
+  margin-bottom: 40px;
+  max-width: 540px;
+}
+.pricing-card {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 0;
+  background: var(--c-canvas);
+  border: 1px solid var(--c-hairline);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-card);
+}
+.pricing-card-left {
+  background: var(--c-primary);
+  padding: 40px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.price-eyebrow {
+  font-family: var(--ff-body);
+  font-size: var(--fs-caption);
+  font-weight: 500;
+  color: rgba(255,255,255,0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.price-amount {
+  font-family: var(--ff-display);
+  font-size: 56px;
+  font-weight: 900;
+  color: var(--c-secondary);
+  letter-spacing: -2px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.price-from {
+  font-family: var(--ff-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 2px;
+}
+.price-note {
+  font-family: var(--ff-body);
+  font-size: var(--fs-caption);
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 28px;
+  line-height: 1.5;
+}
+.pricing-card-right {
+  padding: 36px 40px;
+}
+.checklist-title {
+  font-family: var(--ff-display);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--c-muted);
+  margin-bottom: 18px;
+}
+.checklist {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 24px;
+}
+.checklist li {
+  font-family: var(--ff-body);
+  font-size: var(--fs-body);
+  color: var(--c-ink);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+.checklist li::before {
+  content: '✓';
+  color: var(--c-accent);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.pricing-timeline {
+  display: flex;
+  gap: 0;
+  margin-top: 28px;
+  border-top: 1px solid var(--c-hairline);
+  padding-top: 24px;
+}
+.timeline-step {
+  flex: 1;
+  text-align: center;
+  padding: 0 8px;
+  position: relative;
+}
+.timeline-step + .timeline-step::before {
+  content: '→';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--c-muted);
+  font-size: 14px;
+}
+.timeline-day {
+  font-family: var(--ff-display);
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--c-ink);
+  margin-bottom: 2px;
+}
+.timeline-label {
+  font-family: var(--ff-body);
+  font-size: var(--fs-caption-sm);
+  color: var(--c-muted);
+  line-height: 1.4;
+}
+.pricing-guarantee {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--c-primary);
+  padding: 22px 28px;
+  border-radius: var(--r-md);
+  font-family: var(--ff-body);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+  color: rgba(255,255,255,0.8);
+}
+.guarantee-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.pricing-guarantee strong { color: var(--c-secondary); font-weight: 700; }
+@media (max-width: 960px) {
+  .pricing-card { grid-template-columns: 1fr; }
+  .checklist { grid-template-columns: 1fr; }
+  .pricing-timeline { flex-wrap: wrap; gap: 16px; }
+  .timeline-step + .timeline-step::before { display: none; }
+}
+
 /* ── PREVIEW BADGE ── */
 .preview-badge {
   position: fixed;
@@ -853,6 +1020,17 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   }
 }
 </style>
+
+<!-- Google Analytics 4 — tracks preview link clicks per email variant -->
+<!-- SETUP: analytics.google.com → Admin → Create Account → Web property for jhammond469.github.io -->
+<!-- Then replace BOTH instances of G-XXXXXXXXXX below with your Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
 </head>
 <body>
 
@@ -960,6 +1138,60 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
         <p class="quote-body" id="quote-body">Loading…</p>
         <div class="quote-sig" id="quote-sig">Local customer</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-eyebrow">transparent pricing</div>
+      <h2 class="pricing-title">One simple price. <span style="color:var(--c-accent)">Everything included.</span></h2>
+      <p class="pricing-sub">No hourly rates. No hidden fees. You know exactly what you're paying before we start — and you'll be live in 5 business days.</p>
+    </div>
+    <div class="pricing-card fade-up d1">
+      <div class="pricing-card-left">
+        <div class="price-from">Websites from</div>
+        <div class="price-amount">$1,200</div>
+        <div class="price-note">+ $89/month<br>hosting &amp; maintenance</div>
+        <a href="#contact" class="btn btn-cta">Get a Free Quote →</a>
+      </div>
+      <div class="pricing-card-right">
+        <div class="checklist-title">What's included</div>
+        <ul class="checklist">
+          <li>Up to 5 pages</li>
+          <li>Mobile-first design</li>
+          <li>Fast loading (Google-optimised)</li>
+          <li>SSL certificate</li>
+          <li>Contact form + click-to-call</li>
+          <li>Google Business Profile setup</li>
+          <li>Live in 5 business days</li>
+          <li>30-day satisfaction guarantee</li>
+        </ul>
+        <div class="pricing-timeline">
+          <div class="timeline-step">
+            <div class="timeline-day">Day 1</div>
+            <div class="timeline-label">Quote &amp; brief</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-day">Day 2–3</div>
+            <div class="timeline-label">Design &amp; build</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-day">Day 4</div>
+            <div class="timeline-label">Review &amp; revise</div>
+          </div>
+          <div class="timeline-step">
+            <div class="timeline-day">Day 5</div>
+            <div class="timeline-label">Live online</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pricing-guarantee fade-up d2">
+      <div class="guarantee-icon">★</div>
+      <div><strong>30-day satisfaction guarantee.</strong> If you're not completely happy with your website after launch, we'll fix it until you are — at no extra charge. No arguments, no invoice.</div>
     </div>
   </div>
 </section>
